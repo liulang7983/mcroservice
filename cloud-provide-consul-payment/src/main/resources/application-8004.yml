@@ -1,0 +1,22 @@
+server:
+  port: 8004
+spring:
+  application:
+    name: cloud-provide-consul-payment
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  #当前数据源操作类型
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+  cloud:
+    consul:
+      # consul注册中心地址
+      host: localhost
+      port: 8500
+      discovery:
+        #hostname: 127.0.0.1
+        service-name: ${spring.application.name}
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.buba.springcloud.pojo
