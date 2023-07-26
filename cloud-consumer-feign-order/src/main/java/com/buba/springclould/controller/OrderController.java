@@ -3,6 +3,7 @@ package com.buba.springclould.controller;
 
 import com.buba.springcloud.pojo.CommonResult;
 import com.buba.springcloud.pojo.Payment;
+import com.buba.springclould.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,16 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-    //调用支付订单服务端的ip+端口号
-    public static final String PAYMENT_URL = "http://cloud-provide-eureka-payment";
-    //注入服务发现的注解
-    @Autowired
-    private DiscoveryClient discoveryClient;
-    @Autowired
-    private RestTemplate restTemplate;
 
+    @Autowired
+    public OrderService orderService;
+    @Autowired
+    public  DiscoveryClient discoveryClient;
     //创建支付订单的接口
     @GetMapping("/consumer/payment/create")
     public CommonResult<Payment> create(Payment payment) {
         System.out.println("调用/consumer/payment/create");
-        return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
+        return orderService.create(payment);
     }
 
     //获取id获取支付订单
@@ -45,7 +43,7 @@ public class OrderController {
         System.out.println("调用/consumer/payment/get");
         CommonResult forObject = null;
         for (int i = 0; i < 10; i++) {
-            forObject = restTemplate.getForObject(PAYMENT_URL + "/payment/queryById/" + id, CommonResult.class);
+            forObject = orderService.getPayment(id);
         }
         return forObject;
     }

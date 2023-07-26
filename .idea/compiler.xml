@@ -15,6 +15,7 @@
         <module name="cloud-consumer-order" />
         <module name="cloud-provide-payment" />
         <module name="cloud-consumer-eureka-order" />
+        <module name="cloud-consumer-feign-order" />
       </profile>
     </annotationProcessing>
   </component>
