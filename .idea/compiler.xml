@@ -13,6 +13,7 @@
         <module name="cloud-api-commons" />
         <module name="cloud-consumer-consul-order" />
         <module name="cloud-consumer-order" />
+        <module name="cloud-provider-hystrix-payment" />
         <module name="cloud-provide-payment" />
         <module name="cloud-consumer-eureka-order" />
         <module name="cloud-consumer-feign-order" />
