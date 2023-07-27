@@ -19,4 +19,6 @@ public interface OrderService {
      CommonResult<Payment> create(Payment payment);
      @GetMapping("/payment/queryById/{id}")
      CommonResult<Payment> getPayment(@PathVariable("id") Long id);
+     @GetMapping("/payment/timeout")
+     String timeout();
 }

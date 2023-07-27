@@ -6,10 +6,9 @@ import com.buba.springcloud.pojo.Payment;
 import com.buba.springclould.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ming.li
@@ -45,5 +44,11 @@ public class PaymentControler {
         }else {
             return new CommonResult(200,"查询成功",payment);
         }
+    }
+    //模拟业务接口延时3秒
+    @GetMapping("/timeout")
+    public String PaymentFeignTimeOut() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(3);
+        return "超時";
     }
 }

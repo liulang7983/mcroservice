@@ -31,14 +31,14 @@ public class OrderController {
     @Autowired
     public  DiscoveryClient discoveryClient;
     //创建支付订单的接口
-    @GetMapping("/consumer/payment/create")
+    @GetMapping("/create")
     public CommonResult<Payment> create(Payment payment) {
         System.out.println("调用/consumer/payment/create");
         return orderService.create(payment);
     }
 
     //获取id获取支付订单
-    @GetMapping("/consumer/payment/get/{id}")
+    @GetMapping("/get/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
         System.out.println("调用/consumer/payment/get");
         CommonResult forObject = null;
@@ -59,5 +59,10 @@ public class OrderController {
             logger.info("当前服务的实例有" + s.getServiceId() + "\t" + s.getHost() + "\t" + s.getPort() + "\t" + s.getUri());
         }
         return this.discoveryClient;
+    }
+    @GetMapping("/timeout")
+    public String timeout() {
+        logger.info("进入timeout");
+        return  orderService.timeout();
     }
 }
