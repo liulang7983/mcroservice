@@ -5,6 +5,7 @@ import com.buba.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,5 +37,12 @@ public class PaymentController {
         log.info("paymentInfo_TimeOut*********************result:" + result);
         return new CommonResult(200,result);
 
+    }
+    @GetMapping("/circuit/{id}")
+    public CommonResult paymentCircuitBreaker(@PathVariable("id") Integer id)
+    {
+        String result = paymentService.paymentCircuitBreaker(id);
+        log.info("****result: "+result);
+        return new CommonResult(200,result);
     }
 }
